@@ -5,4 +5,4 @@ from ..models import Ticket
 class TicketSerializer(ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['id', 'asunto', 'descripcion', 'canal', 'grupo', 'creado_el', 'actualizado_el', 'estado', 'usuario']
+        fields = ['id', 'asunto', 'descripcion', 'canal', 'grupo', 'creado_el', 'actualizado_el', 'estado', 'usuario', 'agente']

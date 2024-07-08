@@ -1,8 +1,8 @@
 from rest_framework.permissions import BasePermission
 
-class TicketsPermissions(BasePermission):
+class CommentsPermissions(BasePermission):
     def has_permission(self, request, view):
-        if request.method in ('GET', 'POST'):
+        if request.method in 'PUT':
             if request.user.is_authenticated:
                 return True
             else:

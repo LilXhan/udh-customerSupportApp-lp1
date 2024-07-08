@@ -4,9 +4,18 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 from users.models import User
+from rest_framework import mixins, viewsets
 
 from .serializers import UserRegisterSerializer, UserSerializer, UserUpdateSerializer
+from .permissions import UserPermissionsReadOnly
 
+class UserModelViewSet(mixins.RetrieveModelMixin,
+                       mixins.ListModelMixin,
+                       viewsets.GenericViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    permission_classes = [UserPermissionsReadOnly]
+    
 
 class RegisterView(APIView):
     def post(self, request):
