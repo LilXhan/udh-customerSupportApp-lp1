@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from corsheaders.defaults import default_headers
 from pathlib import Path
 from dotenv import load_dotenv
 from datetime import timedelta
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
-
+API_KEY = os.getenv('API_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'customersupport.middlewares.ApiKeyMiddleware'
 ]
 
 ROOT_URLCONF = 'customersupport.urls'
@@ -143,6 +145,10 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
+]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'API-KEY',
 ]
 
 SIMPLE_JWT = {
